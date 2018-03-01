@@ -1,0 +1,40 @@
+<%- layout('adminpanel') -%>
+<div class="container">
+  <div class="row">
+    <div class="col-11 view">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Full Names</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Area</th>
+            <th scope="col">Landmark</th>
+            <th scope="col">Street</th>
+            <th scope="col">Instruction</th>
+            <th scope="col">Order Items title</th>
+            <th scope="col">Order Items quantity</th>
+            <th scope="col">Order Items total</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% for (var i = 0; i < orders.length; i++) { %>
+          <tr>
+            <td><%= orders[i].fname %> <%= orders[i].lname %></td>
+            <td><%= orders[i].email %></td>
+            <td><%= orders[i].phone %></td>
+            <td><%= orders[i].area %></td>
+            <td><%= orders[i].landmark %></td>
+            <td><%= orders[i].street %></td>
+            <td><%= orders[i].instruction %></td>
+            <!--<td><a href="/admin/orders">Orders</a></td>-->
+            <td><%= orders[i].orderitems.title %></td>
+            <td><%= orders[i].orderitems.quantity %></td>
+            <td><%= orders[i].orderitems.total %></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

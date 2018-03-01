@@ -1,0 +1,47 @@
+<%- layout('layout') -%>
+<div class="container shope">
+  <div class="row">
+    <div class="col-md-7">
+
+           <h3>Your Shopping Basket</h3>
+
+           <% if (message.length > 0) { %>
+           <div class="alert alert-success" role="alert">
+              <%= message %>
+           </div>
+           <% } %>
+
+      <% for (var i = 0; i < foundCart.items.length; i++) { %>
+          <table class="table">
+            <tbody>
+              <tr>
+                <td><img class="order-image-my-gig" src="<%= foundCart.items[i].item.image %>"></td>
+                <td><b><%= foundCart.items[i].item.title %></td>
+                <td><b><%= foundCart.items[i].quantity %></td>
+                <td>KSh <%= foundCart.items[i].price %></td>
+                <td><form method="post" action="/remove">
+                  <input type="hidden" name="item" id="quantity" value="<%= foundCart.items[i]._id %>"></input>
+                  <input type="hidden" name="price" id="priceHidden" value="<%= foundCart.items[i].price %>"></input>
+                  <button type="submit">Remove</button>
+                </form></td>
+              </tr>
+            </tbody>
+          </table>
+       <% } %>
+    </div>
+
+    <div class="col-md-4 checkout">
+      <div class="card">
+        <div class="card-body">
+          <h5><span>Subtotal</span> <span class="jo">(<%= cart %> items)</span>: <span class="cash">KSh <%= foundCart.total %></span></h5>
+          <!--<h5><span>Delivery Fee:</span> <span class="cash">KSh 200</span></h5>-->
+          <hr>
+          <a href="/shop/" style="padding-left:50px;">Continue Shopping</a>
+          <hr>
+          <a href="/checkout" class="btn btn-primary btn-block" style="margin-bottom:10px;">Start Checkout</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

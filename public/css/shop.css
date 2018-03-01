@@ -1,0 +1,120 @@
+.navbar-expand-lg {
+  background-color: #fff;
+  border-bottom: 1px solid #ccc;}
+.feature {
+  padding-top: 4rem;
+  padding-bottom: 4rem;}
+.what img {
+    height: 120px;
+    width: 120px;}
+.shopping .btn-primary {
+    border-top-left-radius: 60;}
+a .btn-primary {
+  background-color: #4267B2 !important;
+  background: linear-gradient(#4267B2, #4267B2);}
+.badge-secondary {
+  background-color: #ff0000;
+  height: 20px;
+  width: 20px;
+  border-radius: 15px;}
+.goog .btn-secondary, .goog .btn-secondary:active,  .goog .btn.active, .goog .btn-secondary:focus {
+		background-color: #FFFFFF;
+    background: linear-gradient(#FFFFFF, #FFFFFF);
+    transition: color 0.2s, background-color 0.2s, box-shadow 0.2s, border 0.2s;
+    border-radius: 3px;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    color: #757575 !important;
+    border: 1px solid #ccc;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16.8px;}
+.goog .btn-secondary:hover {
+  background-color: #FFFFFF;
+  background: linear-gradient(#FFFFFF, #FFFFFF);
+  border: 1px solid #FF0000;
+  font-family: 'Roboto', sans-serif;
+  color: #757575 !important;
+  font-size: 16.8px;}
+.jap {
+  margin-left: -29px;
+  margin-right: 14px;}
+.btn-secondary, .btn-secondary:active,  .btn.active, .btn-secondary:focus {
+		background-color: #4267B2;
+    background: linear-gradient(#4267B2, #4267B2);
+    transition: color 0.2s, background-color 0.2s, box-shadow 0.2s, border 0.2s;
+    border-radius: 3px;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    color: #fff !important;
+    font-size: 17px;
+    font-weight: bold;}
+.btn-secondary:hover {
+  border: 1px solid #4267B2;
+  font-size: 18px;
+}
+.btn-primary, .btn-primary:active,  .btn.active, .btn-primary:focus {
+		background-color: #FF0000 !important;
+    background: linear-gradient(#FF0000, #FF0000);
+    transition: color 0.2s, background-color 0.2s, box-shadow 0.2s, border 0.2s;
+    border-radius: 3px;
+    text-shadow: 0 -1px 1px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    color: #fff !important;
+    border: 1px solid #FF0000;}
+.btn-primary:hover {
+  background-color: #FF0000 !important;
+  background: linear-gradient(#FF0000, #FF0000);
+  transition: color 0.2s, background-color 0.2s, box-shadow 0.2s, border 0.2s;
+  border-radius: 3px;
+  text-shadow: 0 -1px 1px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+  color: #fff !important;
+  border: 1px solid #FF0000;}
+.location ul li {
+  list-style-type: none;}
+.jumbotron {
+  background-image: url('../img/back.jpg');
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;}
+.jumbotron .mx-auto {
+  margin-top: 30px;}
+.chop .card {
+  border: 0;}
+.products {
+  margin-top: 55px;}
+.checkme {
+  padding-top: 65px;
+  padding-bottom: 30px;
+  /*margin-right: auto;
+  margin-left: auto;*/}
+.log {
+  padding-top: 35px;
+  padding-bottom: 99px;
+  margin-top: 60px;
+  margin-right: auto;
+  margin-left: auto;}
+.order-image-my-gig {
+  width: 40px;
+  height: 40px;}
+.laba {
+  margin-right: auto;
+  margin-left: auto;}
+footer.footer {
+  padding-top: 4rem;
+  padding-bottom: 4rem; }
+.shope {
+  padding-top: 80px;}
+.checkout {
+  /*border: 2px solid #ccc;*/
+  margin-left: 40px;}
+.checkout h5 {
+  padding-top: 15px;}
+.jo {
+  color: #ccc;}
+.cash {
+  color: green;}
+.det {
+  color: #333;
+  font-weight: bold;}

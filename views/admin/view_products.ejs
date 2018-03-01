@@ -1,0 +1,51 @@
+<%- layout('adminpanel') -%>
+<div class="container">
+  <div class="row">
+    <div class="col-10 check">
+      <!--<a href="/add-product" class="btn btn-primary">Add Product</a>-->
+    </div>
+  </div>
+</div>
+
+<% if (count > 0) { %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-10 view">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Product</th>
+            <th scope="col">Price</th>
+            <th scope="col">Category</th>
+            <th scope="col">Product Image</th>
+            <th scope="col">Edit</th>
+              <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for (var i = 0; i < products.length; i++)  { %>
+          <tr>
+            <td><%= products[i].title %></td>
+            <td><%= products[i].price %></td>
+            <td><%= products[i].category.title %></td>
+            <td>
+                <% if (products[i].image == "") { %>
+                <img class="order-image-my-gig" src="/img/noimage.png">
+                <%} else {%>
+                <img class="order-image-my-gig" src="<%= products[i].image %>">
+                <% } %>
+            </td>
+            <td><a href="/admin/products/edit-product/<%= products[i]._id %>">Edit</a></td>
+            <td><a class="confirmDeletion" href="/delete-product/<%= products[i]._id %>">Delete</a></td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<% } else {%>
+  <h3 class="text-center">There are no Products</h3>
+<% } %>

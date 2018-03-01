@@ -1,0 +1,47 @@
+<%- layout('layout') -%>
+<div class="container">
+ <div class="row">
+   <div class="col-md-4 log">
+     <h3 style="text-align:center">Sign Up</h3>
+     <p style="text-align: center" class="help-block">Already have an account with us? <a href="/login/" style="color: #FF0000">Log In</a></p>
+
+     <% if (message.length > 0) { %>
+         <div class="alert alert-danger" role="alert">
+            <%= message %>
+         </div>
+         <% } %>
+
+
+         <a class="btn btn-secondary btn-block" href="/auth/facebook" style="height:45px; cursor:pointer">
+           <img src="/img/FB-f-Logo__white_29.png" class="responsive" /> Continue with Facebook
+         </a><br>
+         <div class="goog">
+           <a class="btn btn-secondary btn-block" href="/auth/google" style="height:45px; cursor:pointer">
+             <img src="/img/google.png" class="responsive jap" width="29px"/> Continue with Google
+           </a>
+         </div>
+     <form method="post">
+        <br>
+       <div class="form-group">
+         <div class="row">
+           <div class="col">
+             <input type="text" class="form-control" name="fname" placeholder="First name" style="height:50px">
+           </div>
+           <div class="col">
+             <input type="text" class="form-control" name="lname" placeholder="Last name" style="height:50px">
+           </div>
+         </div>
+       </div>
+       <div class="form-group">
+         <input type="email" class="form-control"  placeholder="Email Address" name="email" style="height:50px">
+       </div>
+       <div class="form-group">
+         <input type="password" class="form-control" placeholder="Password" name="password" style="height:50px">
+       </div>
+       <p class="help-block">By creating an account, you agree to Shopon Foods <a href="#"  style="color: #FF0000">Terms and Conditions</a> and <a href="#"  style="color: #FF0000">Privacy Statement</a>.</p>
+
+       <button type="submit" class="btn btn-primary btn-block" style="height:45px; cursor:pointer">Sign Up</button>
+     </form>
+   </div>
+ </div>
+</div>

@@ -1,0 +1,54 @@
+<%- layout('layout') -%>
+<div class="container checkme">
+
+  <div class="row">
+
+    <% if (message.length > 0) { %>
+      <div class="alert alert-success" role="alert">
+        <%= message %>
+      </div>
+      <% } %>
+
+    <div class="col-md-8 order-md-2 laba">
+      <h4 class="mb-3">Edit Profile</h4>
+      <form class="needs-validation" method="post" action="/edit-profile/<%= id %>">
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <label for="firstName">First name</label>
+            <input type="text" class="form-control" placeholder="" value="<%= user.profile.fname %>" name="fname" style="height:42px;" required>
+            <div class="invalid-feedback">
+              Valid first name is required.
+            </div>
+          </div>
+          <div class="col-md-6 mb-3">
+            <label for="lastName">Last name</label>
+            <input type="text" class="form-control"  placeholder="" value="<%= user.profile.lname %>" name="lname" style="height:42px;" required>
+            <div class="invalid-feedback">
+              Valid last name is required.
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email">Email</label>
+          <input type="email" class="form-control" placeholder="you@example.com" style="height:42px;" value="<%= user.email %>" name="email">
+          <div class="invalid-feedback">
+            Please enter a valid email address for shipping updates.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="telephone">Phone Number</label>
+          <input type="tel" class="form-control" placeholder="0722000000" name="phone" value="<%= user.profile.phone %>" style="height:42px;" required>
+          <div class="invalid-feedback">
+            Please enter your phone number.
+          </div>
+        </div>
+
+
+        <hr class="mb-4">
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Edit Profile</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+<%- layout('layout') -%>
+<div class="container products">
+
+      <div class="row">
+
+        <div class="col-lg-3">
+
+          <br>
+          <div class="list-group">
+            <a href="/shop" class="list-group-item">All Products</a>
+            <% for (var i = 0; i < categories.length; i++) { %>
+            <a href="/products/<%= categories[i]._id %>" class="list-group-item"><%= categories[i].title %></a>
+            <% } %>
+          </div>
+        </div>
+        <!-- /.col-lg-3 -->
+
+        <div class="col-lg-9">
+
+          <div class="card mt-4">
+            <img class="img-fluid" src="<%= product.image %>" alt="">
+            <div class="card-body">
+              <h3 class="card-title"><%= product.title %></h3>
+              <p>Ksh <%= product.price %></p>
+              <p class="card-text" ><%= product.desc %></p>
+
+              <form method="post">
+                 <div class="btn-group" role="group" aria-label="...">
+                   <input type="hidden" name="quantity" id="quantity" value="1"></input>
+                   <button type="button" id="minus" class="btn btn-default">-</button>
+                   <button type="button" id="total" class="btn btn-default">1</button>
+                   <button type="button" id="plus" class="btn btn-default">+</button>
+                 </div>
+
+                 <div class="form-group">
+                   <input type="hidden" name="product_id" id="quantity" value="<%= product._id %>"></input>
+                   <input type="hidden" name="priceHidden" id="priceHidden" value="<%= product.price %>"></input>
+
+                   <input type="text" name="item" id="quantity" class="form-control" id="exampleFormControlInput1" value="<%= product.title %>"></input>
+                   <input type="text" name="priceValue" id="priceValue" class="form-control" id="exampleFormControlInput1" value="<%= product.price %>"></input>
+                 </div>
+                 <div>
+
+             </div><br>
+
+
+                 <% if (user) { %>
+                <button type="submit" class="btn btn-primary" style="cursor:pointer">Add to Basket</button>
+                  <% } else { %>
+                    <a href="/signup" class="btn btn-primary" style="margin-bottom:10px;">Sign up to begin shopping</a>
+                  <% } %>
+
+               </form>
+            </div>
+
+          </div><br>
+          <!-- /.card -->
+
+    <div class="card card-outline-secondary my-4">
+      <div class="card-header">
+        Product Reviews
+      </div>
+      <div class="card-body">
+<% if (user) { %>
+        <div id="reviews">
+          <% for (var i = 0; i < reviews.length; i++) { %>
+          <p><%= reviews[i].content %></p>
+          <small class="text-muted">Posted by <%= reviews[i].owner.profile.fname %> on <%= reviews[i].created %></small>
+          <hr>
+          <% } %>
+        </div>
+
+
+        <form id="sendReview">
+           <div class="form-group">
+             <label for="exampleFormControlInput1">Write a Review</label>
+              <textarea class="form-control" id="review" cols="7" rows="3"></textarea>
+           </div>
+           <button class="btn btn-primary">Post Review</button>
+        </form>
+
+          <% } else { %>
+        <a href="/login" class="btn btn-primary">Sign in to leave a Review</a>
+        <% } %>
+      </div>
+    </div>
+
+
+        </div>
+        <!-- /.col-lg-9 -->
+
+      </div>
+
+    </div>
+    <!-- /.container -->

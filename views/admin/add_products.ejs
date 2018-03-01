@@ -1,0 +1,44 @@
+<%- layout('adminpanel') %>
+<div class="container">
+  <div class="row">
+    <div class="col-6 jango">
+      <h3>Add Products</h3>
+      <a href="/admin/view-products" class="btn btn-primary">Back to all Products</a>
+
+      <% if (message.length > 0) { %>
+        <div class="alert alert-danger" role="alert">
+          <%= message %>
+        </div>
+        <% } %>
+
+
+      <form method="post">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Product Title</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="title">
+        </div>
+        <!--<div class="form-group">
+          <label for="exampleFormControlInput1">Product Image</label>
+          <input type="file" class="form-control-file" name="image" id="img">
+          <img src="#" id="imgPreview" alt="">
+        </div>-->
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Product Image</label>
+          <input type="text" class="form-control" placeholder="" name="image" id="img">
+          <img src="#" id="imgPreview" alt="">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Product Price</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="price">
+        </div>
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Product Detail</label>
+           <textarea class="form-control" id="exampleFormControlTextarea1" cols="30" rows="10" name="desc"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+
+    </div>
+  </div>
+</div>

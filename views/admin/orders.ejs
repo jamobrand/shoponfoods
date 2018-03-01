@@ -1,0 +1,25 @@
+<%- layout('adminpanel') -%>
+
+<div class="container">
+  <div class="row">
+    <div class="col-11 view">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Title</th>
+            <th scope="col">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% for (var i = 0; i < orderitems.length; i++) { %>
+          <tr>
+            <td><%= orderitems %></td>
+            <td><%= orderitems %></td>
+
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

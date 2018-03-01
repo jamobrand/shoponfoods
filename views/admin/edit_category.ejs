@@ -1,0 +1,25 @@
+<%- layout('adminpanel') -%>
+<div class="container">
+  <div class="row">
+    <div class="col-6 jango">
+      <h3>Edit Category</h3>
+
+      <a href="/admin/categories" class="btn btn-primary">Back to Categories</a>
+      <br><br>
+
+      <% if (message.length > 0) { %>
+        <div class="alert alert-success" role="alert">
+          <%= message %>
+        </div>
+        <% } %>
+
+      <form method="post" action="/admin/categories/edit-category/<%= id %>">
+        <div class="form-group">
+          <label for="exampleFormControlInput1">Category Title</label>
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="title" name="title" value="<%= title %>">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

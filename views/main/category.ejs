@@ -1,0 +1,53 @@
+<%- layout('layout') -%>
+<!--<div class="jumbotron">
+      <div class="col-lg-6">
+        <form method="post" action="/search">
+        <div class="input-group">
+          <input type="search" class="form-control" name="q" placeholder="Search for products" aria-label="Search for products" style="height:45px;">
+          <span class="input-group-btn">
+            <button class="btn btn-secondary" type="submit" style="height:45px;background-color:#ff8101;border-color:#ff8101;cursor:pointer">Go!</button>
+          </span>
+        </div>
+      </form>
+      </div>
+    </div>-->
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3">
+      <br>
+
+      <div class="list-group">
+          <a href="/shop" class="list-group-item">All Products</a>
+        <% for (var i = 0; i < categories.length; i++) { %>
+        <a href="/products/<%= categories[i]._id %>" class="list-group-item"><%= categories[i].title %></a>
+        <% } %>
+      </div>
+  </div>
+
+  <div class="col-lg-9">
+    <br>
+
+    <div class="row">
+
+      <% for (var i = 0; i < products.length; i++) { %>
+      <div class="col-lg-4 col-md-6 mb-4">
+        <div class="card h-60">
+          <a href="/product/<%= products[i]._id %>"><img class="card-img-top" src="<%= products[i].image %>" alt=""></a>
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="/product/<%= products[i]._id %>"><%= products[i].title %></a>
+            </h5>
+            <h5>Ksh <%= products[i].price %></h5>
+          </div>
+
+        </div>
+      </div>
+        <% } %>
+
+
+    </div>
+
+  </div>
+</div>
+<hr>
