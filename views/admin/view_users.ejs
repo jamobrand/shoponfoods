@@ -9,6 +9,7 @@
             <th scope="col">User Picture</th>
             <th scope="col">Full Names</th>
             <th scope="col">Email</th>
+            <th scope="col">Phone Number</th>
             <th scope="col">City</th>
             <th scope="col">Estate</th>
             <th scope="col">Street</th>
@@ -16,12 +17,41 @@
           </tr>
         </thead>
         <tbody>
-        <% if (user) { %>
+         <% for (var i = 0; i < users.length; i++) { %>
           <tr>
-            <td><img class="order-image-my-gig" src="<%= user.profile.photo %>"></td>
-            <td><%= user.profile.fname %> <%= user.profile.lname %></td>
-            <td><%= user.email %></td>
+            <td><img class="order-image-my-gig" src="<%= users[i].profile.photo %>"></td>
+            <td><%= users[i].profile.fname %> <%= users[i].profile.lname %></td>
+            <td><%= users[i].email %></td>
+            <td><% if (users[i].profile.phone === "" || typeof users[i].profile.phone === 'undefined') { %>
 
+              <%} else {%>
+                <%= users[i].profile.phone %>
+                <% } %>
+              </td>
+              <td><% if (users[i].profile.city === "" || typeof users[i].profile.city === 'undefined') { %>
+
+                <%} else {%>
+                  <%= users[i].profile.city %>
+                  <% } %>
+                </td>
+                <td><% if (users[i].profile.estate === "" || typeof users[i].profile.estate === 'undefined') { %>
+
+                  <%} else {%>
+                    <%= users[i].profile.estate %>
+                    <% } %>
+                  </td>
+                  <td><% if (users[i].profile.street === "" || typeof users[i].profile.street === 'undefined') { %>
+
+                    <%} else {%>
+                      <%= users[i].profile.street %>
+                      <% } %>
+                    </td>
+                    <td><% if (users[i].profile.apartment === "" || typeof users[i].profile.apartment === 'undefined') { %>
+
+                      <%} else {%>
+                        <%= users[i].profile.apartment %>
+                        <% } %>
+                      </td>
           </tr>
           <% } %>
         </tbody>

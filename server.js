@@ -85,7 +85,7 @@ app.use(function(req, res, next) {
   });
 });
 
-require('./realtime/io')(io);
+//require('./realtime/io')(io);
 
 const mainRoutes = require('./routes/main');
 const userRoutes = require('./routes/user');

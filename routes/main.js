@@ -30,11 +30,12 @@ stream.on('error', function(err) {
   console.log(err);
 });
 
-
+/* Post Search*/
 router.post('/search', function(req, res, next) {
   res.redirect('/search?q=' + req.body.q);
 });
 
+/* GET Search*/
 router.get('/search', function(req, res, next) {
   if (req.query.q) {
     Product.search({
@@ -53,35 +54,12 @@ router.get('/search', function(req, res, next) {
   }
 });
 
-
+/* GET Homepage*/
 router.get('/', function(req, res, next) {
   res.render('main/home');
 });
 
-router.get('/order', function(req, res, next) {
-  Cart
-    .findOne({ owner: req.user._id })
-    .populate('items.item')
-    .exec(function(err, foundCart) {
-      if (err) return next(err);
-      res.render('main/order', {
-        foundCart: foundCart,
-        message: req.flash('remove'),
-        pagetitle: "Order Details"
-      });
-    });
-});
-
-
-router.get('/review', function(req, res) {
-  User.findOne({ _id: req.user._id }, function(err, user) {
- res.render('main/review', {
-   pagetitle: "Review"
- });
-  });
-});
-
-
+/* GET Checkout*/
 router.route('/checkout')
  .get((req, res, next) => {
    Cart
@@ -96,6 +74,7 @@ router.route('/checkout')
      });
  });
 
+/* GET Cart*/
 router.get('/cart', function(req, res, next) {
   Cart
     .findOne({ owner: req.user._id })
@@ -110,6 +89,7 @@ router.get('/cart', function(req, res, next) {
     });
 });
 
+/* Post to Cart/Basket*/
 router.post('/product/:product_id', function(req, res, next) {
   Cart.findOne({ owner: req.user._id }, function(err, cart) {
     cart.items.push({
@@ -127,6 +107,7 @@ router.post('/product/:product_id', function(req, res, next) {
   });
 });
 
+/* Remove Products from Cart/Basket*/
 router.post('/remove', function(req, res, next) {
   Cart.findOne({ owner: req.user._id }, function(err, foundCart) {
     foundCart.items.pull(String(req.body.item));
@@ -140,6 +121,25 @@ router.post('/remove', function(req, res, next) {
   });
 });
 
+/* Post Review on Product*/
+router.post('/review/:id', function(req, res, next) {
+  Product.findById({ _id: req.params.id }, function(err, product) {
+    User.findOne({  _id: req.user._id }, function(err, user) {
+      if (user) {
+        var review = new Review();
+        review.owner = user._id;
+        review.item = product._id;
+        review.content = req.body.content;
+        review.save(function(err) {
+          if (err) return next(err);
+          res.redirect('/shop');
+        });
+      }
+    });
+  });
+});
+
+/* GET All Products*/
 router.get('/shop', function(req, res, next) {
   Product.find(function(err, products) {
     if (err) return next(err);
@@ -150,7 +150,7 @@ router.get('/shop', function(req, res, next) {
   });
 });
 
-
+/* GET Products By Category*/
 router.get('/products/:id', function(req, res, next) {
   Product
     .find({ category: req.params.id })
@@ -164,20 +164,22 @@ router.get('/products/:id', function(req, res, next) {
     });
 });
 
+/* GET Each Product and Review By Product*/
 router.get('/product/:id', function(req, res, next) {
   Product.findById({ _id: req.params.id }, function(err, product) {
-    Review
-      .find({})
-      .sort('-created')
-      .populate('owner')
-      .exec(function(err, reviews) {
-        if (err) return next(err);
-        res.render('main/product', {
-          pagetitle: product.title,
-          product: product,
-          reviews: reviews
+      Review
+        .find({ item: req.params.id })
+        .sort('-created')
+        .populate('owner')
+        .exec(function(err, review) {
+            if (err) return next(err);
+            res.render('main/product', {
+              pagetitle: product.title,
+              product: product,
+              message: req.flash('success'),
+              review: review
+            });
         });
-      })
   });
 });
 

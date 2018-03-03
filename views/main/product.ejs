@@ -62,19 +62,20 @@
       </div>
       <div class="card-body">
 <% if (user) { %>
-        <div id="reviews">
-          <% for (var i = 0; i < reviews.length; i++) { %>
-          <p><%= reviews[i].content %></p>
-          <small class="text-muted">Posted by <%= reviews[i].owner.profile.fname %> on <%= reviews[i].created %></small>
-          <hr>
-          <% } %>
-        </div>
 
 
-        <form id="sendReview">
+  <div>
+    <% for (var i = 0; i < review.length; i++) { %>
+    <p><%= review[i].content %></p>
+    <small class="text-muted">Posted by <%= review[i].owner.profile.fname %> on <%= review[i].created %></small>
+    <hr>
+    <% } %>
+  </div>
+
+        <form method="post" action="/review/<%= product._id %>">
            <div class="form-group">
              <label for="exampleFormControlInput1">Write a Review</label>
-              <textarea class="form-control" id="review" cols="7" rows="3"></textarea>
+              <textarea class="form-control" name="content" cols="7" rows="3"></textarea>
            </div>
            <button class="btn btn-primary">Post Review</button>
         </form>

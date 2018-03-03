@@ -12,8 +12,39 @@
         <div class="col-md-3">
           <h4 style="color:#ff8101; font-weight:bold">Your Details</h4>
           <img src="<%= user.profile.photo %>" class="rounded-circle">
-          <p><span class="det">Names:</span> <%= user.profile.fname %> <%= user.profile.lname %></p>
+          <p><span class="det">Names:</span> <%= user.profile.fname %> <% if (user.profile.lname === "" || typeof user.profile.lname === 'undefined') { %>
+
+              <%} else {%>
+                <%= user.profile.lname %>
+                <% } %></p>
+
           <p><span class="det">Email:</span> <%= user.email %></p>
+          <p><span class="det">Phone Number:</span> <% if (user.profile.phone === "" || typeof user.profile.phone === 'undefined') { %>
+
+            <%} else {%>
+              <%= user.profile.phone %>
+              <% } %></p>
+          <p><span class="det">City:</span>
+            <% if (user.profile.city === "" || typeof user.profile.city === 'undefined') { %>
+
+              <%} else {%>
+                <%= user.profile.city %>
+                <% } %>
+          </p>
+          <p><span class="det">Street:</span>
+            <% if (user.profile.street === "" || typeof user.profile.street === 'undefined') { %>
+
+              <%} else {%>
+                <%= user.profile.street %>
+                <% } %>
+          </p>
+          <p><span class="det">Landmark:</span>
+            <% if (user.profile.landmark === "" || typeof user.profile.landmark === 'undefined') { %>
+
+              <%} else {%>
+                <%= user.profile.landmark %>
+                <% } %>
+          </p>
         </div>
 
 
