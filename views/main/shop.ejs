@@ -17,6 +17,7 @@
     <div class="col-lg-3">
       <br>
 
+      <h1 class="my-4">Categories</h1>
       <div class="list-group">
         <a href="/shop" class="list-group-item">All Products</a>
         <% for (var i = 0; i < categories.length; i++) { %>
@@ -35,9 +36,9 @@
         <div class="card h-100">
           <a href="/product/<%= products[i]._id %>"><img class="card-img-top" src="<%= products[i].image %>" alt=""></a>
           <div class="card-body">
-            <h5 class="card-title">
+            <h4 class="card-title">
               <a href="/product/<%= products[i]._id %>"><%= products[i].title %></a>
-            </h5>
+            </h4>
             <h5>Ksh <%= products[i].price %></h5>
           </div>
 
