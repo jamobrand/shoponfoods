@@ -84,7 +84,7 @@ router.get('/cart', function(req, res, next) {
       res.render('main/cart', {
         foundCart: foundCart,
         message: req.flash('remove'),
-        pagetitle: "Cart Page"
+        pagetitle: "Your Shopping"
       });
     });
 });
@@ -144,7 +144,7 @@ router.get('/shop', function(req, res, next) {
   Product.find(function(err, products) {
     if (err) return next(err);
     res.render('main/shop', {
-      pagetitle: "All Products",
+      pagetitle: "Shopon Foods:Grocery and House Supplies",
       products: products
     });
   });
@@ -158,7 +158,7 @@ router.get('/products/:id', function(req, res, next) {
     .exec(function(err, products) {
       if (err) return next(err);
       res.render('main/category', {
-        pagetitle: "products",
+        pagetitle: "Shopon Foods:Grocery and House Supplies",
         products: products
       });
     });
