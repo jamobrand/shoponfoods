@@ -16,7 +16,7 @@ router.get('/profile', passportConfig.isAuthenticated, function(req, res, next) 
 
       res.render('accounts/profile', {
         user: foundUser,
-        pagetitle: "Profile"
+        pagetitle: "Your Profile"
       });
     });
 });
@@ -25,7 +25,7 @@ router.route('/signup/')
 .get((req, res, next) => {
   res.render('accounts/signup', {
     message: req.flash('errors'),
-    pagetitle: "Shopon Foods - Grocery and House Supplies"
+    pagetitle: "Shopon Foods:Grocery and House Supplies"
   });
 })
 .post((req, res, next) => {
@@ -124,7 +124,7 @@ router.route('/login')
   if (req.user) res.redirect('/');
   res.render('accounts/login', {
     message: req.flash('loginMessage'),
-    pagetitle: "Shopon Foods - Grocery and House Supplies"
+    pagetitle: "Shopon Foods:Grocery and House Supplies"
   });
 })
 .post(passport.authenticate('local-login', {
