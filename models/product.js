@@ -8,11 +8,6 @@ const ProductSchema = new Schema({
   desc: String,
   price: Number,
   image: String,
-  review: [{
-      owner: { type: Schema.Types.ObjectId, ref: 'User'},
-      content: String,
-      created: { type: Date, default: Date.now }
-  }]
 });
 
 ProductSchema.plugin(mongoosastic, {

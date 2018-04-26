@@ -12,11 +12,14 @@ const UserSchema = new Schema({
   googleId: String,
 
   profile: {
-    fname: String,
-    lname: String,
+    fullname: String,
     photo: String,
     phone: String,
-    location: String,
+    city: String,
+    estate: String,
+    street: String,
+    apartment: String,
+    landmark: String,
   },
 
   admin: {
