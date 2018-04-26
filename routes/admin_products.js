@@ -1,5 +1,10 @@
 const router = require('express').Router();
 const async = require('async');
+//const crypto = require('crypto');
+const mkdirp = require('mkdirp');
+const fs = require('fs-extra');
+const resizeImg = require('resize-img');
+//const multer = require('multer');
 const Product = require('../models/product');
 const Category = require('../models/category');
 const auth = require('../config/auth');
@@ -33,6 +38,8 @@ router.route('/admin/:title', isAdmin)
     res.render('admin/add_products', { message: req.flash('success'), pagetitle:"Add Product" });
   })
   .post((req, res, next) => {
+    var imageFile = typeof req.files.image !== "undefined" ? req.files.image.name : "";
+
     async.waterfall([
       function(callback) {
         Category.findOne({ title: req.params.title }, function(err, category) {
@@ -47,9 +54,23 @@ router.route('/admin/:title', isAdmin)
         product.title = req.body.title;
         product.desc = req.body.desc;
         product.price = req.body.price;
-        product.image = req.body.image;
+        product.image = imageFile;
 
-        product.save();
+        product.save(function (err) {
+          if (err) return next(err);
+          mkdirp('public/product_images/' + product._id, function (err) {
+            return console.log(err);
+          });
+
+          if (imageFile != "") {
+            var productImage = req.files.image;
+            var path = 'public/product_images/' + product._id + '/' + imageFile;
+
+            productImage.mv(path, function (err) {
+              return console.log(err);
+            });
+          }
+        });
       }
     ]);
     req.flash('success', 'Product Added');
@@ -76,10 +97,12 @@ router.route('/admin/products/edit-product/:id', isAdmin)
     });
   })
   .post((req, res) => {
+    var imageFile = typeof req.files.image !== "undefined" ? req.files.image.name : "";
+
     var title = req.body.title;
     var price = req.body.price;
     var desc = req.body.desc;
-    var image = req.body.image;
+    var pimage = req.body.pimage;
     var category = req.body.category;
     var id = req.params.id;
 
@@ -96,11 +119,30 @@ router.route('/admin/products/edit-product/:id', isAdmin)
           product.title = title;
           product.price = price;
           product.desc = desc;
-          product.image = image;
+          if (imageFile != "") {
+            product.image = imageFile;
+          }
           product.category = category;
 
           product.save(function(err) {
             if(err) return next(err);
+
+            if (imageFile != "") {
+                            if (pimage != "") {
+                                fs.remove('public/product_images/' + id + '/' + pimage, function (err) {
+                                    if (err)
+                                        console.log(err);
+                                });
+                            }
+
+                            var productImage = req.files.image;
+                                        var path = 'public/product_images/' + id + '/' + imageFile;
+
+                                        productImage.mv(path, function (err) {
+                                            return console.log(err);
+                                        });
+
+                                    }
 
             req.flash('success', 'Product Edited');
             res.redirect('/admin/products/edit-product/' + id);

@@ -1,11 +1,11 @@
 const router = require('express').Router();
+const path = require('path');
 const User = require('../models/user');
 const Cart = require('../models/cart');
 const Order = require('../models/order');
 const async = require('async');
 const passport = require('passport');
 const passportConfig = require('../config/passport');
-
 
 router.get('/profile', passportConfig.isAuthenticated, function(req, res, next) {
   User
@@ -16,7 +16,7 @@ router.get('/profile', passportConfig.isAuthenticated, function(req, res, next) 
 
       res.render('accounts/profile', {
         user: foundUser,
-        pagetitle: "Your Profile"
+        pagetitle: "Profile"
       });
     });
 });
@@ -25,7 +25,7 @@ router.route('/signup/')
 .get((req, res, next) => {
   res.render('accounts/signup', {
     message: req.flash('errors'),
-    pagetitle: "Shopon Foods:Grocery and House Supplies"
+    pagetitle: "Signup - Shopon Foods"
   });
 })
 .post((req, res, next) => {
@@ -40,8 +40,7 @@ router.route('/signup/')
            var user = new User();
            user.email = req.body.email;
            user.password = req.body.password;
-           user.profile.fname = req.body.fname;
-           user.profile.lname = req.body.lname;
+           user.profile.fullname = req.body.fullname;
            user.profile.photo = user.gravatar();
            user.admin = 0;
            user.save(function(err) {
@@ -67,64 +66,62 @@ router.route('/signup/')
 });
 
 router.post('/checkout', function(req, res, next) {
-   async.waterfall([
-     function(callback) {
-       var order = new Order();
-       order.area = req.body.area;
-       order.fname = req.body.fname;
-       order.lname = req.body.lname;
-       order.email = req.body.email;
-       order.phone = req.body.phone;
-       order.landmark = req.body.landmark;
-       order.street = req.body.street;
-       order.instruction = req.body.instruction;
-       order.orderitems.title = req.body.title;
-       order.orderitems.quantity = req.body.quantity;
-       order.orderitems.total = req.body.total;
-        order.save(function(err, order) {
-          if(err) return next(err);
-          callback(err, order);
-        });
-     },
-
-     function(order, callback) {
-       Cart.findOne({ owner: req.user._id }, function(err, cart) {
-         callback(err, cart);
-       });
-     },
-     function(cart, callback) {
-       User.findOne({ _id: req.user._id }, function(err, user) {
-         if (user) {
-           for (var i = 0; i < cart.items.length; i++) {
-             user.history.push({
-               item: cart.items[i].item,
-               paid: cart.items[i].price
-             })
-           }
-
-           user.save(function(err, user) {
-             if (err) return next(err);
-             callback(err, user);
-           });
-         }
-       });
-     },
-     function(user, callback) {
-       Cart.update({ owner: user._id }, { $set: { items: [], total: 0 }}, function(err, updated) {
-         if (updated) {
-           res.redirect('/review');
-         }
-       });
-     }
-   ])
-})
+  async.waterfall([
+    function(callback) {
+      var order = new Order();
+      order.area = req.body.area;
+      order.fname = req.body.fname;
+      order.lname = req.body.lname;
+      order.email = req.body.email;
+      order.phone = req.body.phone;
+      order.landmark = req.body.landmark;
+      order.street = req.body.street;
+      order.instruction = req.body.instruction;
+      order.orderitems.title = req.body.title;
+      order.orderitems.quantity = req.body.quantity;
+      order.orderitems.total = req.body.total;
+      order.save(function(err, order) {
+        if(err) return next(err);
+        callback(err, order);
+      });
+    },
+    function(order, callback) {
+      Cart.findOne({ owner: req.user._id }, function(err, cart) {
+        callback(err, cart);
+      });
+    },
+    function(cart, callback) {
+      User.findOne({ _id: req.user._id }, function(err, user) {
+        if (user) {
+          for (var i = 0; i < cart.items.length; i++) {
+            user.history.push({
+              item: cart.items[i].item,
+              paid: cart.items[i].price
+            })
+          }
+          user.save(function(err, user) {
+            if (err) return next(err);
+            callback(err, user);
+          });
+        }
+      });
+    },
+    function(user, callback) {
+      Cart.update({ owner: user._id }, { $set: { items: [], total: 0 }}, function(err, updated) {
+        if (updated) {
+          res.redirect('/review-order');
+        }
+      });
+    }
+  ]);
+});
 
 router.route('/login')
 .get((req, res, next) => {
   if (req.user) res.redirect('/');
   res.render('accounts/login', {
     message: req.flash('loginMessage'),
-    pagetitle: "Shopon Foods:Grocery and House Supplies"
+    pagetitle: "Login - Shopon Foods"
   });
 })
 .post(passport.authenticate('local-login', {
@@ -171,6 +168,9 @@ router.route('/edit-profile/:id')
   var lname = req.body.lname;
   var email = req.body.email;
   var phone = req.body.phone;
+  var city = req.body.city;
+  var street = req.body.street;
+  var landmark = req.body.landmark;
   var id = req.params.id;
 
   User.findOne({ email: email, _id: {'$ne': id}}, function(err, user) {
@@ -185,6 +185,9 @@ router.route('/edit-profile/:id')
 
         user.profile.fname = fname;
         user.profile.lname = lname;
+        user.profile.city = city;
+        user.profile.landmark = landmark;
+        user.profile.street = street;
         user.email = email;
         user.profile.phone = phone;
 

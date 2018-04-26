@@ -5,6 +5,40 @@ const Cart = require('../models/cart');
 const Order = require('../models/order');
 const Review = require('../models/review');
 
+const one = 200;
+const two = 400;
+
+function paginate(req, res, next) {
+
+  const perPage = 8;
+  const page = req.params.page;
+
+  Product
+    .find()
+    .skip( perPage * page)
+    .limit( perPage )
+    .exec(function(err, products) {
+      if (err) return next(err);
+      Product.count().exec(function(err, count) {
+        if (err) return next(err);
+        res.render('main/shop', {
+          pagetitle: "All Products",
+          products: products,
+          pages: count / perPage
+        });
+      });
+    });
+}
+
+/* GET All Products*/
+router.get('/shop', function(req, res, next) {
+  paginate(req, res, next);
+});
+
+router.get('/page/:page', function(req, res, next) {
+ paginate(req, res, next);
+});
+
 Product.createMapping(function(err, mapping) {
   if (err) {
     console.log("error creating mapping");
@@ -35,6 +69,15 @@ router.post('/search', function(req, res, next) {
   res.redirect('/search?q=' + req.body.q);
 });
 
+/* Review Order */
+router.get('/review-order', function(req, res) {
+  User.findOne({ _id: req.user._id }, function(err, user) {
+ res.render('main/review-order', {
+   pagetitle: "Review"
+ });
+  });
+});
+
 /* GET Search*/
 router.get('/search', function(req, res, next) {
   if (req.query.q) {
@@ -59,6 +102,20 @@ router.get('/', function(req, res, next) {
   res.render('main/home');
 });
 
+/* GET Terms*/
+router.get('/terms', function(req, res, next) {
+  res.render('main/terms', {
+    pagetitle: "Terms and Condition | Shoponfoods"
+  });
+});
+
+/* GET Privacy*/
+router.get('/privacy', function(req, res, next) {
+  res.render('main/privacy', {
+    pagetitle: "Shoponfoods | Privacy Policy"
+  });
+});
+
 /* GET Checkout*/
 router.route('/checkout')
  .get((req, res, next) => {
@@ -66,16 +123,31 @@ router.route('/checkout')
      .findOne({ owner: req.user._id })
      .populate('items.item')
      .exec(function(err, foundCart) {
+       if (foundCart.total == 0) {
+         var totalPrice = 0;
+         req.session.foundCart = foundCart;
+         req.session.total = totalPrice;
+       } else if (foundCart.total < 1000) {
+         var totalPrice = foundCart.total + one;
+         req.session.foundCart = foundCart;
+         req.session.total = totalPrice;
+       } else {
+         var totalPrice = foundCart.total + two;
+         req.session.foundCart = foundCart;
+         req.session.total = totalPrice;
+       }
        if (err) return next(err);
        res.render('main/checkout', {
          foundCart: foundCart,
-         pagetitle: "Checkout"
+         totalPrice: totalPrice,
+         pagetitle: "Checkout Process"
        });
      });
  });
 
 /* GET Cart*/
 router.get('/cart', function(req, res, next) {
+
   Cart
     .findOne({ owner: req.user._id })
     .populate('items.item')
@@ -139,17 +211,6 @@ router.post('/review/:id', function(req, res, next) {
   });
 });
 
-/* GET All Products*/
-router.get('/shop', function(req, res, next) {
-  Product.find(function(err, products) {
-    if (err) return next(err);
-    res.render('main/shop', {
-      pagetitle: "Shopon Foods:Grocery and House Supplies",
-      products: products
-    });
-  });
-});
-
 /* GET Products By Category*/
 router.get('/products/:id', function(req, res, next) {
   Product
@@ -158,7 +219,7 @@ router.get('/products/:id', function(req, res, next) {
     .exec(function(err, products) {
       if (err) return next(err);
       res.render('main/category', {
-        pagetitle: "Shopon Foods:Grocery and House Supplies",
+        pagetitle: "Shopon Foods: Grocery and House Supplies",
         products: products
       });
     });
