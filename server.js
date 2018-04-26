@@ -7,19 +7,24 @@ const engine = require('ejs-mate');
 const session = require('express-session');
 const flash = require('express-flash');
 const passport = require('passport');
+const path = require('path');
 const passportSocketIo = require('passport.socketio');
 const cookieParser = require('cookie-parser');
 const MongoStore = require('connect-mongo')(session);
+const fileUpload = require('express-fileupload');
 const config = require('./config/secret');
 const Category = require('./models/category');
-
 const User = require('./models/user');
 const cartLength = require('./middleware/middlewares');
+
+const fs = require('fs');
+const xml2js = require('xml2js');
 
 
 const app = express();
 const http = require('http').Server(app);
 const io = require('socket.io')(http);
+
 
 const sessionStore = new MongoStore({ url: config.database, autoReconnect: true})
 
@@ -34,6 +39,9 @@ mongoose.connection.on('error', function(err) {
 mongoose.connect(config.database,function(err) {
   if(err) console.log(err);
 });
+
+// Express fileUpload middleware
+app.use(fileUpload());
 
 //Middleware
 app.engine('ejs', engine);
@@ -83,6 +91,11 @@ app.use(function(req, res, next) {
     res.locals.categories = categories;
     next();
   });
+});
+
+app.get('/sitemap.xml', function(req, res) {
+  res.set('Content-Type', 'text/xml');
+  res.send(fs.readFileSync('./sitemap.xml', {encoding: 'utf-8'}))
 });
 
 //require('./realtime/io')(io);
