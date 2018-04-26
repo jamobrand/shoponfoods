@@ -12,36 +12,68 @@
     <div class="col-md-8 order-md-2 laba">
       <h4 class="mb-3">Edit Profile</h4>
       <form class="needs-validation" method="post" action="/edit-profile/<%= id %>">
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="firstName">First name</label>
-            <input type="text" class="form-control" placeholder="" value="<%= user.profile.fname %>" name="fname" style="height:42px;" required>
-            <div class="invalid-feedback">
-              Valid first name is required.
-            </div>
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="lastName">Last name</label>
-            <input type="text" class="form-control"  placeholder="" value="<%= user.profile.lname %>" name="lname" style="height:42px;" required>
-            <div class="invalid-feedback">
-              Valid last name is required.
-            </div>
+
+        <div class="mb-3">
+          <label for="email">Full Names</label>
+          <input type="text" class="form-control" style="height:42px;" value="<%= user.profile.fullname %>" name="fullname" required>
+          <div class="invalid-feedback">
+            Please enter a valid full names.
           </div>
         </div>
 
         <div class="mb-3">
           <label for="email">Email</label>
-          <input type="email" class="form-control" placeholder="you@example.com" style="height:42px;" value="<%= user.email %>" name="email">
+          <input type="email" class="form-control" style="height:42px;" value="<%= user.email %>" name="email" required>
           <div class="invalid-feedback">
-            Please enter a valid email address for shipping updates.
+            Please enter a valid email address.
           </div>
         </div>
 
         <div class="mb-3">
           <label for="telephone">Phone Number</label>
-          <input type="tel" class="form-control" placeholder="0722000000" name="phone" value="<%= user.profile.phone %>" style="height:42px;" required>
+          <% if (user.profile.phone === "" || typeof user.profile.phone === 'undefined') { %>
+            <input type="tel" class="form-control" placeholder="0722000000" name="phone" value="" style="height:42px;" required>
+            <%} else {%>
+            <input type="tel" class="form-control" placeholder="0722000000" name="phone" value="<%= user.profile.phone %>" style="height:42px;" required>
+              <% } %>
           <div class="invalid-feedback">
-            Please enter your phone number.
+            Please enter a valid phone number.
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <label for="Landmark">City</label>
+            <% if (user.profile.phone === "" || typeof user.profile.phone === 'undefined') { %>
+            <input type="text" class="form-control"  placeholder="" style="height:42px;" name="city" value="" required>
+              <%} else {%>
+            <input type="text" class="form-control"  placeholder="" style="height:42px;" name="city" value="<%= user.profile.city %>" required>
+                <% } %>
+            <div class="invalid-feedback">
+              Please enter a valid city.
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="Landmark">Landmark</label>
+            <% if (user.profile.phone === "" || typeof user.profile.phone === 'undefined') { %>
+            <input type="text" class="form-control"  placeholder="" style="height:42px;" name="landmark" value="" required>
+              <%} else {%>
+              <input type="text" class="form-control"  placeholder="" style="height:42px;" name="landmark" value="<%= user.profile.landmark %>" required>
+                <% } %>
+            <div class="invalid-feedback">
+              Please enter a valid landmark.
+            </div>
+          </div>
+          <div class="col-md-3 mb-3">
+            <label for="street">Street Name</label>
+            <% if (user.profile.phone === "" || typeof user.profile.phone === 'undefined') { %>
+            <input type="text" class="form-control" id="zip" placeholder="" style="height:42px;" name="street" value="" required>
+              <%} else {%>
+          <input type="text" class="form-control" id="zip" placeholder="" style="height:42px;" name="street" value="<%= user.profile.street %>" required>
+                <% } %>
+            <div class="invalid-feedback">
+              Please enter a valid Street Name.
+            </div>
           </div>
         </div>
 

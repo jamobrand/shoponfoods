@@ -1,9 +1,9 @@
-<%- layout('layout') -%>
+<%- layout('layoutsign') -%>
 <div class="container">
  <div class="row">
    <div class="col-md-4 log">
-     <h1 style="text-align:center">Sign up</h1>
-     <p style="text-align: center" class="help-block">Already have an account with us? <a href="/login/" style="color: #FF0000">Sign in</a></p>
+     <h3 style="text-align:center">Sign Up</h3>
+     <p style="text-align: center" class="help-block">Already have an account with us? <a href="/login" style="color: #FF0000">Log In</a></p>
 
      <% if (message.length > 0) { %>
          <div class="alert alert-danger" role="alert">
@@ -22,23 +22,16 @@
          </div>
      <form method="post">
         <br>
-       <div class="form-group">
-         <div class="row">
-           <div class="col">
-             <input type="text" class="form-control" name="fname" placeholder="First name" style="height:50px">
-           </div>
-           <div class="col">
-             <input type="text" class="form-control" name="lname" placeholder="Last name" style="height:50px">
-           </div>
-         </div>
-       </div>
+        <div class="form-group">
+          <input type="text" class="form-control"  placeholder="Full Names" name="fullname" style="height:50px">
+        </div>
        <div class="form-group">
          <input type="email" class="form-control"  placeholder="Email Address" name="email" style="height:50px">
        </div>
        <div class="form-group">
          <input type="password" class="form-control" placeholder="Password" name="password" style="height:50px">
        </div>
-       <p class="help-block">By creating an account, you agree to Shopon Foods <a href="#"  style="color: #FF0000">Terms and Conditions</a> and <a href="#"  style="color: #FF0000">Privacy Statement</a>.</p>
+       <p class="help-block">By creating an account, you agree to Shopon Foods <a href="/terms"  style="color: #FF0000">Terms and Conditions</a> and <a href="/privacy"  style="color: #FF0000">Privacy Statement</a>.</p>
 
        <button type="submit" class="btn btn-primary btn-block" style="height:45px; cursor:pointer">Sign Up</button>
      </form>

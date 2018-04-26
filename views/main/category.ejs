@@ -16,9 +16,7 @@
   <div class="row">
     <div class="col-lg-3">
       <br>
-
       <div class="list-group">
-      <h1 class="my-4">Categories</h1>
           <a href="/shop" class="list-group-item">All Products</a>
         <% for (var i = 0; i < categories.length; i++) { %>
         <a href="/products/<%= categories[i]._id %>" class="list-group-item"><%= categories[i].title %></a>
@@ -28,27 +26,21 @@
 
   <div class="col-lg-9 cat">
     <br>
-
     <div class="row">
-
       <% for (var i = 0; i < products.length; i++) { %>
-      <div class="col-lg-4 col-md-6 mb-4">
+      <div class="col-lg-3 col-md-6 mb-4">
         <div class="card h-60">
-          <a href="/product/<%= products[i]._id %>"><img class="card-img-top" src="<%= products[i].image %>" alt=""></a>
+          <a href="/product/<%= products[i]._id %>"><img class="card-img-top" src="/product_images/<%= products[i]._id %>/<%= products[i].image %>" alt=""></a>
           <div class="card-body">
-            <h4 class="card-title">
+            <h6 class="card-title">
               <a href="/product/<%= products[i]._id %>"><%= products[i].title %></a>
-            </h4>
-            <h5>Ksh <%= products[i].price %></h5>
+            </h6>
+            <h6>Ksh <%= products[i].price %></h6>
           </div>
-
         </div>
       </div>
         <% } %>
-
-
     </div>
-
   </div>
 </div>
-<hr>
+<hr class="mb-4">

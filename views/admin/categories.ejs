@@ -1,34 +1,57 @@
 <%- layout('adminpanel') -%>
-<div class="container">
-  <div class="row">
-    <div class="col-10 check">
-      <a href="/admin/categories/add-category" class="btn btn-primary">Add Category</a>
-    </div>
-  </div>
-</div>
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Categories</li>
+      </ol>
+
+      <div>
+      <a href="/admin/categories/add-category" class="btn btn-primary">Add Category</a><br><br>
+
+      </div>
+
+      <!-- Example DataTables Card-->
+        <div class="card mb-3">
+          <div class="card-header">
+            <i class="fa fa-table"></i> Data Table Example</div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tfoot>
+                  <tr>
+                    <th>Category</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                  </tr>
+                </tfoot>
+                <tbody>
+                  <% for (var i = 0; i < categories.length; i++)  { %>
+                    <tr>
+                      <td><%= categories[i].title %></td>
+                      <td><a href="/admin/categories/edit-category/<%= categories[i]._id %>">Edit</a></td>
+                      <td><a class="confirmDeletion" href="/delete-category/<%= categories[i]._id %>">Delete</a></td>
+                    </tr>
+                    <% } %>
+                  </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
 
 
-<div class="container">
-  <div class="row">
-    <div class="col-10 view">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Category</th>
-            <th scope="col">Edit</th>
-            <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% for (var i = 0; i < categories.length; i++)  { %>
-          <tr>
-            <td><%= categories[i].title %></td>
-            <td><a href="/admin/categories/edit-category/<%= categories[i]._id %>">Edit</a></td>
-            <td><a class="confirmDeletion" href="/delete-category/<%= categories[i]._id %>">Delete</a></td>
-          </tr>
-          <% } %>
-        </tbody>
-      </table>
+      </div>
     </div>
-  </div>
-</div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->

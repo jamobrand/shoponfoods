@@ -1,44 +1,43 @@
 <%- layout('adminpanel') %>
-<div class="container">
-  <div class="row">
-    <div class="col-6 jango">
-      <h3>Add Products</h3>
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active">Add Product</li>
+    </ol>
       <a href="/admin/view-products" class="btn btn-primary">Back to all Products</a>
+    <!-- Icon Cards-->
+    <div class="row">
+      <div class="col-6 jango">
+        <h3>Add Products</h3>
 
-      <% if (message.length > 0) { %>
-        <div class="alert alert-danger" role="alert">
-          <%= message %>
-        </div>
-        <% } %>
-
-
-      <form method="post">
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Product Title</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="title">
-        </div>
-        <!--<div class="form-group">
-          <label for="exampleFormControlInput1">Product Image</label>
-          <input type="file" class="form-control-file" name="image" id="img">
-          <img src="#" id="imgPreview" alt="">
-        </div>-->
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Product Image</label>
-          <input type="text" class="form-control" placeholder="" name="image" id="img">
-          <img src="#" id="imgPreview" alt="">
-        </div>
+        <form method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Product Title</label>
+            <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="title" required>
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlInput1">Product Image</label>
+            <input type="file" class="form-control-file" name="image" required>
+          </div>
         <div class="form-group">
           <label for="exampleFormControlInput1">Product Price</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="price">
+          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="price" required>
         </div>
         <div class="form-group">
           <label for="exampleFormControlInput1">Product Detail</label>
-           <textarea class="form-control" id="exampleFormControlTextarea1" cols="30" rows="10" name="desc"></textarea>
+          <textarea class="form-control" id="exampleFormControlTextarea1" cols="30" rows="10" name="desc" required></textarea>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
+     </div>
+    </div>
 
 
     </div>
   </div>
-</div>
+  <!-- /.container-fluid-->
+  <!-- /.content-wrapper-->

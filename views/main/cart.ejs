@@ -4,7 +4,6 @@
     <div class="col-md-7">
 
            <h3>Your Shopping Basket</h3>
-
            <% if (message.length > 0) { %>
            <div class="alert alert-success" role="alert">
               <%= message %>
@@ -15,14 +14,14 @@
           <table class="table">
             <tbody>
               <tr>
-                <td><img class="order-image-my-gig" src="<%= foundCart.items[i].item.image %>"></td>
+                <td><img class="order-image-my-gig" src="/product_images/<%= foundCart.items[i].item._id %>/<%= foundCart.items[i].item.image %>"></td>
                 <td><b><%= foundCart.items[i].item.title %></td>
                 <td><b><%= foundCart.items[i].quantity %></td>
                 <td>KSh <%= foundCart.items[i].price %></td>
                 <td><form method="post" action="/remove">
                   <input type="hidden" name="item" id="quantity" value="<%= foundCart.items[i]._id %>"></input>
                   <input type="hidden" name="price" id="priceHidden" value="<%= foundCart.items[i].price %>"></input>
-                  <button type="submit">Remove</button>
+                  <button type="submit" class="btn btn-danger">Remove</button>
                 </form></td>
               </tr>
             </tbody>
@@ -42,6 +41,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>

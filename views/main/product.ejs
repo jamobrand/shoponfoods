@@ -6,7 +6,6 @@
         <div class="col-lg-3">
 
           <br>
-          <h1 class="my-4">Categories</h1>
           <div class="list-group">
             <a href="/shop" class="list-group-item">All Products</a>
             <% for (var i = 0; i < categories.length; i++) { %>
@@ -19,7 +18,7 @@
         <div class="col-lg-9">
 
           <div class="card mt-4">
-            <img class="img-fluid" src="<%= product.image %>" alt="">
+            <img class="img-fluid" src="/product_images/<%= product._id %>/<%= product.image %>" alt="">
             <div class="card-body">
               <h3 class="card-title"><%= product.title %></h3>
               <p>Ksh <%= product.price %></p>
@@ -37,8 +36,8 @@
                    <input type="hidden" name="product_id" id="quantity" value="<%= product._id %>"></input>
                    <input type="hidden" name="priceHidden" id="priceHidden" value="<%= product.price %>"></input>
 
-                   <input type="text" name="item" id="quantity" class="form-control" id="exampleFormControlInput1" value="<%= product.title %>"></input>
-                   <input type="text" name="priceValue" id="priceValue" class="form-control" id="exampleFormControlInput1" value="<%= product.price %>"></input>
+                   <input type="text" name="item" id="quantity" class="form-control"  value="<%= product.title %>"></input>
+                   <input type="text" name="priceValue" id="priceValue" class="form-control" value="<%= product.price %>"></input>
                  </div>
                  <div>
 
@@ -46,7 +45,11 @@
 
 
                  <% if (user) { %>
+
+                
                 <button type="submit" class="btn btn-primary" style="cursor:pointer">Add to Basket</button>
+
+
                   <% } else { %>
                     <a href="/signup" class="btn btn-primary" style="margin-bottom:10px;">Sign up to begin shopping</a>
                   <% } %>

@@ -1,50 +1,63 @@
 <%- layout('adminpanel') %>
-<div class="container">
-  <div class="row">
-    <div class="col-6 jango">
-      <h3>Add Products</h3>
-      <a href="/admin/view-products" class="btn btn-primary">Back to all Products</a>
 
-      <% if (message.length > 0) { %>
-        <div class="alert alert-success" role="alert">
-          <%= message %>
-        </div>
-        <% } %>
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Edit Product</li>
+      </ol>
+      <!-- Icon Cards-->
+      <div class="row">
+        <div class="col-6 jango">
+          <h3>Edit Product</h3>
+          <a href="/admin/view-products" class="btn btn-primary">Back to all Products</a>
+          <% if (message.length > 0) { %>
+            <div class="alert alert-success" role="alert">
+              <%= message %>
+            </div>
+            <% } %>
 
+          <form method="post" action="/admin/products/edit-product/<%= id %>" enctype="multipart/form-data">
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Product Title</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="title" value="<%= title %>">
+            </div>
 
-      <form method="post" action="/admin/products/edit-product/<%= id %>">
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Product Title</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="title" value="<%= title %>">
-        </div>
+            <div class="form-group">
+              <label for="exampleFormControlInput1">Category</label>
+              <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="category" value="<%= category %>">
+            </div>
+            <div class="form-group">
+              <label for="">Current Image</label>
+              <p>
+                <% if (image == "") { %>
+                  <img class="order-image-my-gig" src="/images/noimage.png" alt="">
+                  <% } else {%>
+                    <img class="order-image-my-gig" src="/product_images/<%= id %>/<%= image %>" alt="">
+                    <% } %>
+                  </p>
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Product Image</label>
+                  <input type="file" class="form-control-file" name="image">
+                </div>
+                <input type="hidden" name="pimage" value="<%= image %>">
 
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Category</label>
-        <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="category" value="<%= category %>">
-        </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Product Price</label>
+                  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="price" value="<%= price %>">
+                </div>
+                <div class="form-group">
+                  <label for="exampleFormControlInput1">Product Detail</label>
+                  <textarea class="form-control" id="exampleFormControlTextarea1" cols="30" rows="10" name="desc"><%= desc %></textarea>
+                </div>
 
-        <!--<div class="form-group">
-          <label for="exampleFormControlInput1">Product Image</label>
-          <input type="file" class="form-control-file" name="image" id="img">
-          <img src="#" id="imgPreview" alt="">
-        </div>-->
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Product Image</label>
-          <input type="text" class="form-control" placeholder="" name="image" id="img" value="<%= image %>">
-          <img src="#" id="imgPreview" alt="">
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Product Price</label>
-          <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="" name="price" value="<%= price %>">
-        </div>
-        <div class="form-group">
-          <label for="exampleFormControlInput1">Product Detail</label>
-           <textarea class="form-control" id="exampleFormControlTextarea1" cols="30" rows="10" name="desc"><%= desc %></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-
-
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+      </div>
     </div>
-  </div>
-</div>
+    <!-- /.container-fluid-->
+    <!-- /.content-wrapper-->

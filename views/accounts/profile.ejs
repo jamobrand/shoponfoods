@@ -3,7 +3,7 @@
 <nav aria-label="breadcrumb" role="navigation">
       <ol class="breadcrumb">
         <li class="breadcrumb-item active" aria-current="page" style="font-size:40px; font-weight:400">YOUR PROFILE</li>
-        <li style="float:right"><a href="/edit-profile/<%= user._id %>" class="btn btn-primary">Edit-Profile</a><li>
+        <!--<li style="float:right"><a href="/edit-profile/<%= user._id %>" class="btn btn-primary">Edit-Profile</a><li>-->
       </ol>
     </nav>
 
@@ -12,15 +12,9 @@
         <div class="col-md-3">
           <h4 style="color:#ff8101; font-weight:bold">Your Details</h4>
           <img src="<%= user.profile.photo %>" class="rounded-circle">
-          <p><span class="det">Names:</span> <%= user.profile.fname %> <% if (user.profile.lname === "" || typeof user.profile.lname === 'undefined') { %>
-
-              <%} else {%>
-                <%= user.profile.lname %>
-                <% } %></p>
-
+          <p><span class="det">Names:</span> <%= user.profile.fullname %></p>
           <p><span class="det">Email:</span> <%= user.email %></p>
           <p><span class="det">Phone Number:</span> <% if (user.profile.phone === "" || typeof user.profile.phone === 'undefined') { %>
-
             <%} else {%>
               <%= user.profile.phone %>
               <% } %></p>
@@ -45,6 +39,7 @@
                 <%= user.profile.landmark %>
                 <% } %>
           </p>
+          <a href="/edit-profile/<%= user._id %>" class="btn btn-primary">Edit-Profile</a>
         </div>
 
 

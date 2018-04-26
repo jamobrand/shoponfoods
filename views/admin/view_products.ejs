@@ -1,51 +1,70 @@
 <%- layout('adminpanel') -%>
-<div class="container">
-  <div class="row">
-    <div class="col-10 check">
-      <!--<a href="/add-product" class="btn btn-primary">Add Product</a>-->
-    </div>
-  </div>
-</div>
+<div class="content-wrapper">
+  <div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item active">Products</li>
+    </ol>
+    <% if (count > 0) { %>
 
-<% if (count > 0) { %>
-
-<div class="container">
-  <div class="row">
-    <div class="col-10 view">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">Product</th>
-            <th scope="col">Price</th>
-            <th scope="col">Category</th>
-            <th scope="col">Product Image</th>
-            <th scope="col">Edit</th>
-              <th scope="col">Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% for (var i = 0; i < products.length; i++)  { %>
-          <tr>
-            <td><%= products[i].title %></td>
-            <td><%= products[i].price %></td>
-            <td><%= products[i].category.title %></td>
-            <td>
-                <% if (products[i].image == "") { %>
-                <img class="order-image-my-gig" src="/img/noimage.png">
-                <%} else {%>
-                <img class="order-image-my-gig" src="<%= products[i].image %>">
-                <% } %>
-            </td>
-            <td><a href="/admin/products/edit-product/<%= products[i]._id %>">Edit</a></td>
-            <td><a class="confirmDeletion" href="/delete-product/<%= products[i]._id %>">Delete</a></td>
-          </tr>
+    <!-- Example DataTables Card-->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i> Data Table Example</div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Category</th>
+                  <th>Product Image</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Category</th>
+                  <th>Product Image</th>
+                  <th>Edit</th>
+                  <th>Delete</th>
+                </tr>
+              </tfoot>
+              <tbody>
+                <% for (var i = 0; i < products.length; i++)  { %>
+                  <tr>
+                    <td><%= products[i].title %></td>
+                    <td><%= products[i].price %></td>
+                    <td><%= products[i].category.title %></td>
+                    <td>
+                      <% if (products[i].image == "") { %>
+                        <img class="order-image-my-gig" src="/img/noimage.png">
+                        <%} else {%>
+                          <img class="order-image-my-gig" src="/product_images/<%= products[i]._id %>/<%= products[i].image %>">
+                          <% } %>
+                        </td>
+                        <td><a href="/admin/products/edit-product/<%= products[i]._id %>">Edit</a></td>
+                        <td><a class="confirmDeletion" href="/delete-product/<%= products[i]._id %>">Delete</a></td>
+                      </tr>
+                      <% } %>
+                    </tbody>
+            </table>
+          </div>
+        </div>
+        <% } else {%>
+          <h3 class="text-center">There are no Products</h3>
           <% } %>
-        </tbody>
-      </table>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+
+
     </div>
   </div>
-</div>
-
-<% } else {%>
-  <h3 class="text-center">There are no Products</h3>
-<% } %>
+  <!-- /.container-fluid-->
+  <!-- /.content-wrapper-->

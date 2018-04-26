@@ -1,9 +1,9 @@
-<%- layout('layout') -%>
+<%- layout('layoutlog') -%>
 <div class="container">
      <div class="row">
        <div class="col-lg-4 log">
-         <h1 style="text-align:center">Sign in</h1>
-         <p style="text-align: center" class="help-block">New to Shoponfoods? <a href="/signup/" style="color: #FF0000">Sign up</a></p>
+         <h3 style="text-align:center">Log in</h3>
+         <p style="text-align: center" class="help-block">New to Shoponfoods? <a href="/signup" style="color: #FF0000">Sign Up</a></p>
 
          <% if (message.length > 0) { %>
              <div class="alert alert-danger" role="alert">
@@ -12,11 +12,11 @@
              <% } %>
 
              <a class="btn btn-secondary btn-block" href="/auth/facebook" style="height:45px; cursor:pointer">
-               <img src="/img/FB-f-Logo__white_29.png" class="responsive" />Sign in with Facebook
+               <img src="/img/FB-f-Logo__white_29.png" class="responsive" /> Login with Facebook
              </a><br>
              <div class="goog">
                <a class="btn btn-secondary btn-block" href="/auth/google" style="height:45px; cursor:pointer">
-                 <img src="/img/google.png" class="responsive jap" width="29px"/> Sign in with Google
+                 <img src="/img/google.png" class="responsive jap" width="29px"/> Login with Google
                </a><br>
              </div>
          <form method="post">

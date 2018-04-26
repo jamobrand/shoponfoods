@@ -1,31 +1,56 @@
 
-
-<nav class="navbar navbar-expand-lg navbar-light fixed-top">
-  <a class="navbar-brand" href="/admin"><b>Admin</b></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<!-- Navigation-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+  <a class="navbar-brand" href="/admin">Shoponfoods Admin</a>
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavDropdown">
-    <ul class="navbar-nav">
-      <li>
-        <a class="nav-link" href="/admin/categories">Categories</a>
+  <div class="collapse navbar-collapse" id="navbarResponsive">
+    <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+        <a class="nav-link" href="/admin">
+          <i class="fa fa-fw fa-dashboard"></i>
+          <span class="nav-link-text">Dashboard</span>
+        </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/view-products">Products</a>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Categories">
+        <a class="nav-link" href="/admin/categories">
+          <i class="fa fa-fw fa-area-chart"></i>
+          <span class="nav-link-text">Categories</span>
+        </a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/admin/view-users">Users</a>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Products">
+        <a class="nav-link" href="/admin/view-products">
+          <i class="fa fa-fw fa-table"></i>
+          <span class="nav-link-text">Products</span>
+        </a>
       </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Users">
+        <a class="nav-link" href="/admin/view-users">
+          <i class="fa fa-fw fa-user"></i>
+          <span class="nav-link-text">Users</span>
+        </a>
+      </li>
+      <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Orders">
+        <a class="nav-link" href="/admin/view-orders">
+          <i class="fa fa-fw fa-shopping-cart"></i>
+          <span class="nav-link-text">Orders</span>
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav sidenav-toggler">
       <li class="nav-item">
-        <a class="nav-link" href="/admin/view-orders">Orders</a>
+        <a class="nav-link text-center" id="sidenavToggler">
+          <i class="fa fa-fw fa-angle-left"></i>
+        </a>
       </li>
     </ul>
     <ul class="navbar-nav ml-auto">
-      <li>
-        <a class="nav-link" href="/logout">Logout</a>
+
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+          <i class="fa fa-fw fa-sign-out"></i>Logout</a>
       </li>
-
-
     </ul>
   </div>
 </nav>
